@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: poll
+  namespace: default
   labels:
     app: poll
 spec:
@@ -25,4 +26,4 @@ spec:
         - containerPort: 80
         envFrom:
         - configMapRef:
-          name: poll
+          name: redis-config
