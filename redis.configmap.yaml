@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: redis
+  name: redis-config
   namespace: default
+  labels:
+    app: redis
 data:
   REDIS_HOST: redis
