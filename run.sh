@@ -32,11 +32,19 @@ kubectl apply -f traefik.rbac.yaml
 kubectl apply -f traefik.service.yaml
 
 # Create database manually after first deploy
-echo “CREATE TABLE votes (id text PRIMARY KEY, vote text NOT NULL);” \
-| kubectl exec -i <postgres-deployment-id> -c <postgres-container-id> \
-– psql -U <username>
+set username orchestrator
+set postgres_deployment_id 'kubectl get pods -l=app=postgres -o name'
+set postgres_container_id "postgres"
+echo "CREATE TABLE votes (id text PRIMARY KEY, vote text NOT NULL);" \
+| kubectl exec -i $postgres_deployment_id -c $postgres_container_id \
+– psql -U $username
 
 # Adds 2 fake DNS to /etc/hosts
-echo “$(kubectl get nodes -o jsonpath=‘{ $.items[*].status.addresses[?(@.type==“ExternalIP”)].address }’) \
-poll.dop.io result.dop.io” \
+echo "(kubectl get nodes -o jsonpath='{ .items[*].status.addresses[?(@.type=="ExternalIP")].address }') \
+poll.dop.io result.dop.io" \
 | sudo tee -a /etc/hosts
+
+# Check websites
+curl result.dop.io:30021
+curl poll.dop.io:30021
+curl poll.dop.io:30042
