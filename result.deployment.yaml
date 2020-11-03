@@ -16,6 +16,15 @@ spec:
         app: result
     spec:
       restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - result
       containers:
       - name: result
         image: epitechcontent/t-dop-600-result:k8s

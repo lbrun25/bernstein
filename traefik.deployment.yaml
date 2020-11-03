@@ -16,6 +16,15 @@ spec:
         app: traefik
     spec:
       restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: router
+                operator: In
+                values:
+                - traefik
       containers:
       - name: traefik
         image: traefik:1.7

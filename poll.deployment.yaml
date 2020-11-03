@@ -16,12 +16,21 @@ spec:
         app: poll
     spec:
       restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - poll
       containers:
       - name: poll
         image: epitechcontent/t-dop-600-poll:k8s
         resources:
           limits:
-            memory: 128Mi
+            memory: "128Mi"
         ports:
         - containerPort: 80
         envFrom:
