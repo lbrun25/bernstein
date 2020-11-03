@@ -3,7 +3,5 @@ kind: ConfigMap
 metadata:
   name: redis-config
   namespace: default
-  labels:
-    app: redis
 data:
   REDIS_HOST: redis
