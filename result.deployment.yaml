@@ -30,7 +30,7 @@ spec:
         image: epitechcontent/t-dop-600-result:k8s
         resources:
           limits:
-            memory: 128Mi
+            memory: 128M
         ports:
         - containerPort: 80
         envFrom:
