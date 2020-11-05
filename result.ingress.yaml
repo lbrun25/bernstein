@@ -13,6 +13,5 @@ spec:
         - path: /
           pathType: Prefix
           backend:
-            service:
-              serviceName: result-service
-              servicePort: 80
+            serviceName: result-service
+            servicePort: 80
