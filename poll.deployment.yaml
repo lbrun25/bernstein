@@ -36,4 +36,4 @@ spec:
         - containerPort: 80
         envFrom:
         - configMapRef:
-          name: redis-config
+            name: redis-config
