@@ -17,14 +17,15 @@ spec:
     spec:
       restartPolicy: Always
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: router
-                operator: In
-                values:
-                - traefik
+          - labelSelector:
+            matchExpressions:
+            - key: router
+              operator: In
+              values:
+              - traefik
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: traefik
         image: traefik:1.7

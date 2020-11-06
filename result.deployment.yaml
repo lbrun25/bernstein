@@ -17,14 +17,15 @@ spec:
     spec:
       restartPolicy: Always
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - result
+          - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - result
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: result
         image: epitechcontent/t-dop-600-result:k8s
